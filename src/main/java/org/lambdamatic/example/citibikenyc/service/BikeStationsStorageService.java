@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.lambdamatic.example.citibikenyc.domain.BikeStation;
 import org.lambdamatic.example.citibikenyc.domain.BikeStationCollection;
+import org.lambdamatic.example.citibikenyc.domain.BikeStationStatus;
 import org.lambdamatic.mongodb.types.geospatial.Location;
 
 /**
@@ -48,5 +49,14 @@ public class BikeStationsStorageService {
 		return bikeStationCollection.find(s -> s.location.geoWithin(locations)).toList();
 	}
 
+	/**
+	 * Finds all {@link BikeStation} within the polygon built after the given array of {@link Location}
+	 * @param locations the polygon corner location
+	 * @return the list of {@link BikeStation} within the polygon
+	 */
+	public List<BikeStation> findWithin(final List<Location> locations) {
+		return bikeStationCollection.find(s -> s.status == BikeStationStatus.IN_SERVICE && s.location.geoWithin(locations)).toList();
+	}
+	
 
 }
