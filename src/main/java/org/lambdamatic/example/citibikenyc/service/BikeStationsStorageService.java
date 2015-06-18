@@ -1,4 +1,5 @@
 /**
+/**
  * 
  */
 package org.lambdamatic.example.citibikenyc.service;
@@ -42,20 +43,21 @@ public class BikeStationsStorageService {
 	
 	/**
 	 * Finds all {@link BikeStation} within the polygon built after the given array of {@link Location}
-	 * @param locations the polygon corner location
+	 * @param corners the polygon corner location
 	 * @return the list of {@link BikeStation} within the polygon
 	 */
-	public List<BikeStation> findWithin(final Location[] locations) {
-		return bikeStationCollection.find(s -> s.location.geoWithin(locations)).toList();
+	public List<BikeStation> findWithin(final Location[] corners) {
+		return bikeStationCollection.filter(s -> s.location.geoWithin(corners)).toList();
 	}
 
 	/**
 	 * Finds all {@link BikeStation} within the polygon built after the given array of {@link Location}
-	 * @param locations the polygon corner location
+	 * @param corners the polygon corner location
 	 * @return the list of {@link BikeStation} within the polygon
 	 */
-	public List<BikeStation> findWithin(final List<Location> locations) {
-		return bikeStationCollection.find(s -> s.status == BikeStationStatus.IN_SERVICE && s.location.geoWithin(locations)).toList();
+	public List<BikeStation> findWithin(final List<Location> corners) {
+		return bikeStationCollection.filter(s -> s.status.equals(BikeStationStatus.IN_SERVICE) 
+				&& s.location.geoWithin(corners)).toList();
 	}
 	
 

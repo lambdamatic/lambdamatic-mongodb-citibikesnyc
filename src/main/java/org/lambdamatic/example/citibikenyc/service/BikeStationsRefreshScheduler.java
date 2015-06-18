@@ -26,8 +26,8 @@ public class BikeStationsRefreshScheduler {
 	@EJB
 	private BikeStationsRefreshService refreshService;
 	
-	@PostConstruct
-    @Schedule(second="0", minute="*/2",hour="*", persistent=false)
+	//@PostConstruct
+    //@Schedule(second="0", minute="*/2",hour="*", persistent=false)
     public void downloadContent() {
     	try {
     		final URL downloadURL = new URL(BIKE_STATIONS_URL);

@@ -15,24 +15,6 @@ $.ready(new function() {
 					}).addTo(map);
 
 	var markers = {};
-
-	function getBikeStationsForCurrentMapView() {
-		var locations = new Array(4);
-		locations[0] = toLocation(map.getBounds().getSouthWest());
-		locations[1] = toLocation(map.getBounds().getNorthWest());
-		locations[2] = toLocation(map.getBounds().getNorthEast());
-		locations[3] = toLocation(map.getBounds().getSouthEast());
-		var message = JSON.stringify(locations);
-		console.log("Sending " + message);
-		webSocket.send(message);
-	}
-
-	function toLocation(location) {
-		var result = new Object();
-		result.latitude = location.lat;
-		result.longitude = location.lng;
-		return result;
-	}
 	
 	var webSocketURI = "ws://" + window.location.host + "/" + window.location.pathname + "/bikestations";
 	var webSocket = new WebSocket(webSocketURI);
@@ -48,6 +30,17 @@ $.ready(new function() {
 	webSocket.onclose = function() {
 		console.log("Connection is closed...");
 	};
+	
+	function getBikeStationsForCurrentMapView() {
+		var locations = new Array(4);
+		locations[0] = toLocation(map.getBounds().getSouthWest());
+		locations[1] = toLocation(map.getBounds().getNorthWest());
+		locations[2] = toLocation(map.getBounds().getNorthEast());
+		locations[3] = toLocation(map.getBounds().getSouthEast());
+		var message = JSON.stringify(locations);
+		console.log("Sending " + message);
+		webSocket.send(message);
+	}
 	
 	webSocket.onmessage = function(evt) {
 		var bikestations = JSON.parse(evt.data);
@@ -69,6 +62,11 @@ $.ready(new function() {
 		}
 	};
 	
-
+	function toLocation(location) {
+		var result = new Object();
+		result.latitude = location.lat;
+		result.longitude = location.lng;
+		return result;
+	}
 	
 });
