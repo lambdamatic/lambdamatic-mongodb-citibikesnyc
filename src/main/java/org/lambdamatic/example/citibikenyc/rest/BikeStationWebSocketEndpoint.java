@@ -24,8 +24,8 @@ public class BikeStationWebSocketEndpoint {
 	private BikeStationsStorageService bikeStationsStorageService;
 	
 	@OnMessage
-	public List<BikeStation> findBikeStations(final List<Location> locations) {
-		final List<BikeStation> bikeStations = bikeStationsStorageService.findWithin(locations); 
+	public List<BikeStation> findBikeStations(final List<Location> corners) {
+		final List<BikeStation> bikeStations = bikeStationsStorageService.findWithin(corners); 
 		return bikeStations;
 	}
 

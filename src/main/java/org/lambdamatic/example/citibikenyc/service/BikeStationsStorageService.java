@@ -56,8 +56,9 @@ public class BikeStationsStorageService {
 	 * @return the list of {@link BikeStation} within the polygon
 	 */
 	public List<BikeStation> findWithin(final List<Location> corners) {
-		return bikeStationCollection.filter(s -> s.status.equals(BikeStationStatus.IN_SERVICE) 
-				&& s.location.geoWithin(corners)).toList();
+		final List<BikeStation> bikeStations = bikeStationCollection
+				.filter(s -> s.status.equals(BikeStationStatus.IN_SERVICE) && s.location.geoWithin(corners)).toList();
+		return bikeStations;
 	}
 	
 

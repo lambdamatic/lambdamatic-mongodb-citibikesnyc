@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 
 /**
  * The {@link BikeStation} refresh service, ie, a {@link Schedule}d EJB that downloads every 5 minutes the update
- * bikestation data.
+ * {@link BikeStation} data.
  * 
  * @author xcoulon
  *
